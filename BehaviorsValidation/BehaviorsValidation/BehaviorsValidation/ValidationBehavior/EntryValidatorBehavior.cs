@@ -53,9 +53,9 @@ namespace BehaviorsValidation.ValidationBehavior
 
         private void Validate(Entry entry, string newTextValue)
         {
-            SetDefaultValidate(entry);
             if (!entry.IsVisible || !entry.IsEnabled)
             {
+                SetDefaultValidate(entry);
                 return;
             }
 
@@ -92,6 +92,13 @@ namespace BehaviorsValidation.ValidationBehavior
                 .WithMessage(Messages.MaximizeValueIs + MaxValue)
 
                 .ApplyResult<EntryValidatorBehavior, Entry>(this);
+
+            if (!IsValid)
+            {
+                entry.TextColor = Color.Red;
+                return;
+            }
+
 
             //if (IsCheckEmpty)
             //{

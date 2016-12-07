@@ -1,3 +1,4 @@
+using System;
 using Xamarin.Forms;
 
 namespace BehaviorsValidation.ValidationBehavior
@@ -17,6 +18,7 @@ namespace BehaviorsValidation.ValidationBehavior
             {
                 SetValue(IsValidPropertyKey, value);
                 OnPropertyChanged();
+                OnPropertyChanged("IsVisibleMessage");
             }
         }
 
@@ -35,5 +37,16 @@ namespace BehaviorsValidation.ValidationBehavior
         }
 
         public bool IsVisibleMessage => !IsValid;
+
+        public void NoValided(string message)
+        {
+            IsValid = false;
+            Message = message;
+        }
+        public void Valided()
+        {
+            IsValid = true;
+            Message = string.Empty;
+        }
     }
 }

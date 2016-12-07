@@ -61,11 +61,16 @@
         <Entry Keyboard="Numeric" Text="{Binding Amount, Mode=TwoWay}"
                Placeholder="Your amount...">
             <Entry.Behaviors>
-                <validationBehavior:EntryValidatorBehavior
-                    IsCheckEmpty="True"
-                    MinValue="1"
-                    MaxValue="100"
-                    x:Name="AmountValidator" />
+              <validationBehavior:EntryValidatorBehavior
+                  IsCheckEmpty="True"
+                  x:Name="AmountValidator" >
+                <validationBehavior:EntryValidatorBehavior.MinValue>
+                  <x:Decimal>1</x:Decimal>
+                </validationBehavior:EntryValidatorBehavior.MinValue>
+                <validationBehavior:EntryValidatorBehavior.MaxValue>
+                  <x:Decimal>999</x:Decimal>
+                </validationBehavior:EntryValidatorBehavior.MaxValue>
+              </validationBehavior:EntryValidatorBehavior>
             </Entry.Behaviors>
         </Entry>
 
