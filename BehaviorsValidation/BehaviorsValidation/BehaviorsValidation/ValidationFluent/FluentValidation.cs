@@ -7,7 +7,6 @@ namespace BehaviorsValidation.ValidationFluent
     {
         private ValidationCollected _validationCollected;
         private readonly bool _hasValidation = false;
-        //private bool _isValid = true;
         private string _message = string.Empty;
         private readonly List<Func<bool>> _validateFuncs;
 
@@ -27,7 +26,6 @@ namespace BehaviorsValidation.ValidationFluent
 
         public FluentValidation ValidateBy(Func<bool> func)
         {
-            //_isValid = _isValid && (!_hasValidation || func());
             _validateFuncs.Add(func);
             return this;
         }
