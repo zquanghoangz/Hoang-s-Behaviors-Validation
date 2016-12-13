@@ -15,7 +15,15 @@ namespace BehaviorsValidation.ValidationFluent
             _validationObjects = new List<ValidationObject>();
         }
 
-        public T ApplyResult<T, TCtrl>(T validatorBehavior) where TCtrl : BindableObject
+        /// <summary>
+        /// Apply the first invalid validation
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="TCtrl"></typeparam>
+        /// <param name="validatorBehavior"></param>
+        /// <returns></returns>
+        public T ApplyResult<T, TCtrl>(T validatorBehavior)
+            where TCtrl : BindableObject
             where T : ValidatorBehavior<TCtrl>
         {
             var validationObject = _validationObjects.FirstOrDefault(x => !x.IsValid);
@@ -34,12 +42,21 @@ namespace BehaviorsValidation.ValidationFluent
             return validatorBehavior;
         }
 
-        public T ApplyAllResults<T, TCtrl>(T validatorBehavior) where TCtrl : BindableObject
+        /// <summary>
+        /// Collect all invalid messages and apply at one
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="TCtrl"></typeparam>
+        /// <param name="validatorBehavior"></param>
+        /// <param name="separate"></param>
+        /// <returns></returns>
+        public T ApplyAllResults<T, TCtrl>(T validatorBehavior, string separate = ", ")
+            where TCtrl : BindableObject
             where T : ValidatorBehavior<TCtrl>
         {
             if (_validationObjects != null && _validationObjects.Any())
             {
-                var message = string.Join(", ", _validationObjects.Select(x => x.Message));
+                var message = string.Join(separate, _validationObjects.Select(x => x.Message));
                 validatorBehavior.NoValided(message);
             }
             else
@@ -52,7 +69,10 @@ namespace BehaviorsValidation.ValidationFluent
             return validatorBehavior;
         }
 
-        public void Add(bool hasValidation, List<Func<bool>> validateFuncs, string message)
+        public void Add(
+            bool hasValidation,
+            List<Func<bool>> validateFuncs,
+            string message)
         {
             _validationObjects.Add(new ValidationObject
             {

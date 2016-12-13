@@ -15,7 +15,8 @@ namespace BehaviorsValidation.ValidationBehavior
 
         public static bool IsValidEmail(string input)
         {
-            return (Regex.IsMatch(input, EmailRegex, RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250)));
+            return (Regex.IsMatch(input, EmailRegex,
+                RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250)));
         }
 
         public static bool IsValidEmpty(string input)
@@ -41,7 +42,8 @@ namespace BehaviorsValidation.ValidationBehavior
 
         public static bool IsValidTelephone(string input)
         {
-            return (Regex.IsMatch(input, TelephoneRegex, RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250)));
+            return (Regex.IsMatch(input, TelephoneRegex,
+                RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250)));
         }
 
         public static bool IsValidMaxValue(string input, decimal value)

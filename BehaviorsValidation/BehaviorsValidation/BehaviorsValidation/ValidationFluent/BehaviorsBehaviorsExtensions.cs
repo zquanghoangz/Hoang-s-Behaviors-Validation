@@ -9,9 +9,9 @@ namespace BehaviorsValidation.ValidationFluent
             (this T subject, Expression<Func<T, bool>> expressionProperty)
         {
             Func<T, bool> func = expressionProperty.Compile();
-            bool value = func(subject);
+            bool hasValidation = func(subject);
 
-            return new FluentValidation(value);
+            return new FluentValidation(hasValidation);
         }
 
         public static FluentValidation When<TValidator>
@@ -20,9 +20,9 @@ namespace BehaviorsValidation.ValidationFluent
                 Expression<Func<TValidator, bool>> expressionProperty)
         {
             Func<TValidator, bool> func = expressionProperty.Compile();
-            bool value = func(subject);
+            bool hasValidation = func(subject);
 
-            return new FluentValidation(validationCollected, value);
+            return new FluentValidation(validationCollected, hasValidation);
         }
     }
 }
